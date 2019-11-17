@@ -58,12 +58,12 @@ def get_root_list():
 		if os.path.isfile(root_dir + '/' + el):
 			html_code += '<li><a href="http://' + hostName + ':' + str(hostPort) + '/previewFile/' + el + '">' + el + '</a>'
 			html_code += '<a href="http://' + hostName + ':' + str(hostPort) + '/downloadFile/' + el + '">' + ' [dwnld]' + '</a>'
-			html_code += '<a href="http://' + hostName + ':' + str(hostPort) + '/delete/' + el + '">' + ' [rmv]' + '</a>'
+			html_code += '<a href="http://' + hostName + ':' + str(hostPort) + '/delete/' + el + '">' + ' [del]' + '</a>'
 			html_code += '</li>'
 		else:
 			html_code += '<li><a href="http://' + hostName + ':' + str(hostPort) + '/' + el + '">' + el + '/' + '</a>'
 			if os.listdir(root_dir + '/' + el) == []:
-				html_code += '<a href="http://' + hostName + ':' + str(hostPort) + '/delete/' + el + '">' + ' [rmv]' + '</a>'
+				html_code += '<a href="http://' + hostName + ':' + str(hostPort) + '/delete/' + el + '">' + ' [del]' + '</a>'
 			html_code += '</li>'
 	return ('<meta charset="UTF-8"/>' + html_code)
 
@@ -82,7 +82,7 @@ def get_list(subpath):
 		else:
 			html_code += '<li><a href="http://' + hostName + ':' + str(hostPort) + '/' + subpath + '/' + el + '">' + el + '/' + '</a>'
 			if os.listdir(directory + '/' + el) == []:
-				html_code += '<a href="http://' + hostName + ':' + str(hostPort) + '/delete/' + subpath + '/' + el + '">' + ' [rmv]' + '</a>'
+				html_code += '<a href="http://' + hostName + ':' + str(hostPort) + '/delete/' + subpath + '/' + el + '">' + ' [del]' + '</a>'
 			html_code += '</li>'
 	return ('<meta charset="UTF-8"/>' + html_code)
 
