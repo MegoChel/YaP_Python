@@ -34,7 +34,7 @@ class FileManager:
 		raise MyException("File not exist", status_code=400)
 
 	@staticmethod
-	def delelte_file_or_empty_dir(path):
+	def delelte(path):
 		if not os.path.exists(path):
 			raise MyException("Not found", status_code=400)
 		if os.path.isfile(path) or os.path.islink(path):
@@ -77,7 +77,7 @@ def get_list(subpath):
 		if os.path.isfile(root_dir + '/' + subpath + '/' + el):
 			html_code += '<li><a href="http://' + hostName + ':' + str(hostPort) + '/previewFile/' + subpath + '/' + el + '">' + el + '</a>'
 			html_code += '<a href="http://' + hostName + ':' + str(hostPort) + '/downloadFile/' + subpath + '/' + el + '">' + ' [dwnld]' + '</a>'
-			html_code += '<a href="http://' + hostName + ':' + str(hostPort) + '/delete/' + subpath + '/' + el + '">' + ' [rmv]' + '</a>'
+			html_code += '<a href="http://' + hostName + ':' + str(hostPort) + '/delete/' + subpath + '/' + el + '">' + ' [del]' + '</a>'
 			html_code += '</li>'
 		else:
 			html_code += '<li><a href="http://' + hostName + ':' + str(hostPort) + '/' + subpath + '/' + el + '">' + el + '/' + '</a>'
@@ -101,7 +101,7 @@ def download_file(subpath):
 @app.route("/delete/<path:subpath>")	
 def delete(subpath):
 	File_dir = root_dir + '/' + subpath
-	FileManager.delelte_file_or_empty_dir(File_dir)
+	FileManager.delelte(File_dir)
 	return "Success"
 
 @app.route("/createDir/<path:subpath>")
@@ -110,6 +110,7 @@ def __create_dir(subpath):
 	FileManager.create_dir(directory)
 	return "Success"
 
+#Реализация для скачивания из остальных папок
 @app.route('/upload/<path:subpath>')
 def upload_file(subpath):
 	File_dir = root_dir + '/' + subpath
